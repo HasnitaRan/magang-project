@@ -19,11 +19,11 @@ Route::get('/dashboard', function () {
     
     switch ($user->role) {
         case 'admin':
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('dashboard.admin');
         case 'guru':
-            return redirect()->route('guru.dashboard');
+            return redirect()->route('dashboard.guru');
         case 'siswa':
-            return redirect()->route('siswa.dashboard');
+            return redirect()->route('dashboard.siswa');
         default:
             return redirect('/'); 
     }
@@ -38,19 +38,19 @@ Route::middleware('auth')->group(function () {
 
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('dashboard.admin');
    
 });
 
 
 Route::middleware(['auth', 'role:guru'])->group(function () {
-    Route::get('/guru/dashboard', [GuruController::class, 'dashboard'])->name('guru.dashboard');
+    Route::get('/guru/dashboard', [GuruController::class, 'dashboard'])->name('dashboard.guru');
     
 });
 
 
 Route::middleware(['auth', 'role:siswa'])->group(function () {
-    Route::get('/siswa/dashboard', [SiswaController::class, 'dashboard'])->name('siswa.dashboard');
+    Route::get('/siswa/dashboard', [SiswaController::class, 'dashboard'])->name('dashboard.siswa');
     
 });
 
