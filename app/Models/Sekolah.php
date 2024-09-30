@@ -9,6 +9,9 @@ class Sekolah extends Model
 {
     use HasFactory;
 
+    // Menentukan nama tabel secara eksplisit
+    protected $table = 'sekolah';
+
     protected $fillable = [
         'nama_sekolah',
         'npsn',
@@ -26,3 +29,4 @@ class Sekolah extends Model
         'logo_sekolah',
     ];
 }
+
