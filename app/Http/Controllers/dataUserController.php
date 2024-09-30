@@ -11,4 +11,22 @@ class dataUserController extends Controller
         $users = User::all();
         return view('admin.dataUser.dataUser',compact('users'));
     }
+
+    public function create()
+    {
+        return view('users.create');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'username' => 'required',
+            'email' => 'required|email'
+        ]);
+
+        User::create($validated);
+
+        return redirect()->route('users.index')->with('success', 'User created successfully.');
+    }
+
 }

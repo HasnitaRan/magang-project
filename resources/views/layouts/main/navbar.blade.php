@@ -17,7 +17,7 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-light purple-bg-color">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-2" href="{{ url('admin/dashboard') }}">
+        <a class="navbar-brand ps-2" href="{{ url('dashboard') }}">
             <img src="{{ asset('image/Rimberio.png') }}" alt="Logo" style="width: 10rem;">
         </a>
         <!-- Sidebar Toggle-->

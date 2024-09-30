@@ -48,9 +48,9 @@
         </div>
 
         <div>
-            <x-input-label for="status_aktif" :value="__('Status Aktif')" />
+            <x-input-label for="status_aktif" :value="__('Status Akun')" />
             <p id="status_aktif" class="mt-1 block w-full text-gray-900">
-                {{ $user->status_aktif === 'aktif' ? 'Aktif' : 'Nonaktif' }}
+                {{ $user->status_aktif  }}
             </p>
         </div>
 
