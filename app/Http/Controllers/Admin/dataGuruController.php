@@ -19,12 +19,7 @@ class dataGuruController extends Controller
     {
         return view('admin.dataGuru.dataGuru');
     }
-    // public function show($id) {
-    //     $guru = Guru::find($id); // Laravel akan mencari berdasarkan id_guru
-    //     return response()->json([
-    //         'data' => $guru
-    //     ]);
-    // }
+
 
     public function show($id) {
         $guru = Guru::with(['user', 'agama'])->find($id); // Load relasi user dan agama
@@ -66,7 +61,7 @@ class dataGuruController extends Controller
         $user = User::create([
             'username' => $data['nip'], // Username berdasarkan NIP
             'email' => $data['email'],
-            'password' => Hash::make($data['nip']), // Password juga NIP
+            'password' => Hash::make('Guru12345'),
             'role' => 'guru', // Set role menjadi guru
         ]);
 

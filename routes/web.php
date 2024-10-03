@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\dataGuruController;
+use App\Http\Controllers\Admin\dataSiswaController;
 use App\Models\Sekolah;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -52,15 +53,18 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('admin/sekolah', [SekolahController::class, 'index'])->name('sekolah.index');
     Route::get('/sekolah/edit/{id}', [SekolahController::class, 'edit'])->name('sekolah.edit');
     Route::put('/sekolah/update/{id}', [SekolahController::class, 'update'])->name('sekolah.update');
-    //menu data siswa
 
-    //menu data siswa
+    //menu data user
     Route::get('/users', [dataUserController::class, 'serversideTable']); // get data
     Route::resource('admin/users', dataUserController::class)->except(['create', 'edit']);
 
-    //menu data siswa
+    //menu data guru
     Route::get('/gurus', [dataGuruController::class, 'serversideTable']); // get data
     Route::resource('admin/guru', dataGuruController::class)->except(['create', 'edit']);
+
+    //menu data guru
+    Route::get('/siswas', [dataSiswaController::class, 'serversideTable']); // get data
+    Route::resource('admin/siswa', dataSiswaController::class)->except(['create', 'edit']);
 
 
 

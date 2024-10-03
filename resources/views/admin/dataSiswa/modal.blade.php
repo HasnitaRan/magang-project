@@ -19,6 +19,11 @@
                             placeholder="Ketik NIS">
                     </div>
                     <div class="mb-3">
+                        <label for="nisn">NISN<small class="text-danger">*</small></label>
+                        <input type="number" name="nisn" class="form-control" id="nisn"
+                            placeholder="Ketik NISN">
+                    </div>
+                    <div class="mb-3">
                         <label for="tempat_lahir">Tempat Lahir<small class="text-danger">*</small></label>
                         <input type="text" name="tempat_lahir" class="form-control" id="tempat_lahir"
                             placeholder="Ketik Tempat Lahir">
@@ -61,9 +66,35 @@
                         <input type="email" name="email" class="form-control" id="email"
                             placeholder="Ketik Email">
                     </div>
+                    <div class="mb-3">
+                        <label for="status_dalam_keluarga">Status Dalam Keluarga <small
+                                class="text-danger">*</small></label>
+                        <select name="status_dalam_keluarga" id="status_dalam_keluarga" class="form-control"
+                            required>
+                            <option disabled selected hidden>-- Pilih --</option>
+                            <option value="anak kandung">Anak Kandung</option>
+                            <option value="anak angkat">Anak Angkat</option>
+                            <option value="anak tiri">Anak Tiri</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="anak_ke">Anak Ke-<small class="text-danger">*</small></label>
+                        <input type="number" name="anak_ke" class="form-control" id="anak_ke"
+                            placeholder="Ketik Anak Ke-">
+                    </div>
+                    <div class="mb-3">
+                        <label for="asal_sekolah">Asal Sekolah<small class="text-danger">*</small></label>
+                        <input type="text" name="asal_sekolah" class="form-control" id="asal_sekolah"
+                            placeholder="Ketik Asal Sekolah">
+                    </div>
+                    <div class="mb-3">
+                        <label for="tahun_masuk">Tahun Masuk<small class="text-danger">*</small></label>
+                        <input type="number" name="tahun_masuk" class="form-control" id="tahun_masuk"
+                            placeholder="Ketik Tahun Masuk">
+                    </div>
                     <!-- Status Akun only visible during editing -->
                     <div class="mb-3" id="statusAkunContainer" style="display: none;">
-                        <label for="status_aktif" class="form-label">Status Akun</label>
+                        <label for="status_aktif" class="form-label">Status Siswa</label>
                         <select class="form-select" id="status_aktif" name="status_aktif" required>
                             <option value="aktif">Aktif</option>
                             <option value="nonaktif">Tidak Aktif</option>

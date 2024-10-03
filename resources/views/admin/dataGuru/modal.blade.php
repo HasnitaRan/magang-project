@@ -63,7 +63,7 @@
                     </div>
                     <!-- Status Akun only visible during editing -->
                     <div class="mb-3" id="statusAkunContainer" style="display: none;">
-                        <label for="status_aktif" class="form-label">Status Akun</label>
+                        <label for="status_aktif" class="form-label">Status Guru</label>
                         <select class="form-select" id="status_aktif" name="status_aktif" required>
                             <option value="aktif">Aktif</option>
                             <option value="nonaktif">Tidak Aktif</option>
