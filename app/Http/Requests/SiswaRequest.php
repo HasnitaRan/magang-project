@@ -38,7 +38,7 @@ class SiswaRequest extends FormRequest
             'email' => 'required|email|max:50|unique:users,email,'. $userId,
             'status_aktif' => 'required|in:aktif,nonaktif,',
             'status_dalam_keluarga'=>'required|in:anak kandung,anak angkat,anak tiri,',
-            'anak_ke' => 'nullable|numeric|digits_between:2,10',
+            'anak_ke' => 'nullable|numeric|digits_between:1,10',
             'tahun_masuk'=> 'required|numeric|digits:4',
             'asal_sekolah'=>'required|string|max:100',
         ];
