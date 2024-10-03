@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('tgl_lahir');
             $table->enum('jenis_kelamin',['L','P']);
             $table->string('alamat',200);
-            $table->string('no_hp',13);
+            $table->string('no_hp',13)->nullable();;
             $table->enum('status_dalam_keluarga',['anak kandung','anak angkat','anak tiri']);
             $table->string('anak_ke')->nullable();
             $table->string('asal_sekolah',100);

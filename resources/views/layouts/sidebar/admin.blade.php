@@ -25,8 +25,10 @@
                     <div class="collapse" id="collapsePosts" aria-labelledby="headingTwo"
                         data-bs-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href={{ url('admin/sekolah') }}>Data Sekolah</a>
-                            <a class="nav-link" href="#">Data Guru</a>
+                            <a class="nav-link {{ Request::is('admin/sekolah') ? 'active' : '' }}"
+                                href="{{ url('admin/sekolah') }}">Data Sekolah</a>
+                            <a class="nav-link {{ Request::is('admin/guru') ? 'active' : '' }}"
+                                href="{{ url('admin/guru') }}">Data Guru</a>
                             <a class="nav-link" href="#">Data Kelas</a>
                             <a class="nav-link" href="#">Data Siswa</a>
                             <a class="nav-link" href="#">Data Ekskul</a>

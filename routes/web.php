@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\dataGuruController;
 use App\Models\Sekolah;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -8,12 +9,12 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SekolahController;
-use App\Http\Controllers\dataUserController;
+use App\Http\Controllers\Admin\dataUserController;
 
 
 Route::get('/', function () {
     if (Auth::check()) {
-        return view('welcome'); 
+        return view('welcome');
     } else {
         return redirect()->route('login');
     }
@@ -48,19 +49,20 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('dashboard.admin');
 
     //menu data sekolah
-    Route::get('admin/sekolah', [SekolahController::class, 'index'])->name('admin.sekolah');                                                      
-    // Route::get('admin/sekolah/{sekolah}/edit', [SekolahController::class, 'edit'])->name('admin.sekolah.edit');
-    // Route::put('admin/sekolah/{sekolah}', [SekolahController::class, 'update'])->name('admin.sekolah.update');
+    Route::get('admin/sekolah', [SekolahController::class, 'index'])->name('sekolah.index');
+    Route::get('/sekolah/edit/{id}', [SekolahController::class, 'edit'])->name('sekolah.edit');
+    Route::put('/sekolah/update/{id}', [SekolahController::class, 'update'])->name('sekolah.update');
+    //menu data siswa
 
     //menu data siswa
-    Route::get('admin/users', [dataUserController::class, 'index'])->name('admin.users.index'); // View all users
-    Route::get('admin/users/create', [dataUserController::class, 'create'])->name('admin.users.create'); // Form to create user
-    Route::post('admin/users', [dataUserController::class, 'store'])->name('admin.users.store'); // Save new user
-    Route::get('admin/users/{user}/edit', [dataUserController::class, 'edit'])->name('admin.users.edit'); // Form to edit user
-    Route::put('admin/users/{user}', [dataUserController::class, 'update'])->name('admin.users.update'); // Update user
-    Route::delete('admin/users/{user}', [dataUserController::class, 'destroy'])->name('admin.users.destroy'); // Delete user
+    Route::get('/users', [dataUserController::class, 'serversideTable']); // get data
+    Route::resource('admin/users', dataUserController::class)->except(['create', 'edit']);
 
-    
+    //menu data siswa
+    Route::get('/gurus', [dataGuruController::class, 'serversideTable']); // get data
+    Route::resource('admin/guru', dataGuruController::class)->except(['create', 'edit']);
+
+
 
 });
 

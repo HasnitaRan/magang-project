@@ -5,24 +5,26 @@
     <main>
         <div class="px-4 container-fluid">
 
-            <h1 class="mt-4">Data User</h1>
+            <h1 class="mt-4">Data Guru</h1>
             <ol class="mb-4 breadcrumb">
                 <h3 class="breadcrumb-item active">SMAN 1 TEGAL</h3>
             </ol>
 
             <div class="container mt-5">
                 <div class="card">
-                    <div class="card-header">Tabel User</div>
+                    <div class="card-header">Tabel Data Guru</div>
                     <div class="card-body">
-                        <button class="mb-2 btn btn-primary" onclick="showModal()">Tambah User</button>
-                        <table class="table table-bordered table-striped" id="tableUser">
+                        <button class="mb-2 btn btn-primary" onclick="showModal()">Tambah Guru</button>
+                        <table class="table table-bordered table-striped" id="tableGuru">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Username</th>
+                                    <th>Nama</th>
+                                    <th>L/P</th>
+                                    <th>NIP</th>
                                     <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Status Akun</th>
+                                    <th>No Hp</th>
+                                    <th>Status Guru</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -37,40 +39,49 @@
 
         </div>
     </main>
-    @include('admin.dataUser.modal')
+    @include('admin.dataGuru.modal')
     @include('layouts.main.footer')
     <script>
         let userId; // Variabel global untuk menyimpan user ID
-
         $(document).ready(function() {
             usersTable();
         });
 
         function usersTable() {
-            $('#tableUser').DataTable({
+            $('#tableGuru').DataTable({
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                ajax: '/users',
+                ajax: '/gurus',
                 columns: [{
-                    data: 'DT_RowIndex',
-                    nama: 'DT_RowIndex',
-                }, {
-                    data: 'username',
-                    nama: 'username',
-                }, {
-                    data: 'email',
-                    nama: 'email',
-                }, {
-                    data: 'role',
-                    nama: 'role',
-                }, {
-                    data: 'status_aktif',
-                    nama: 'status_aktif',
-                }, {
-                    data: 'aksi',
-                    nama: 'aksi',
-                }]
+                        data: 'DT_RowIndex',
+                        nama: 'DT_RowIndex',
+                    }, {
+                        data: 'nama_guru',
+                        nama: 'nama_guru',
+                    }, {
+                        data: 'jenis_kelamin',
+                        nama: 'jenis_kelamin',
+                    }, {
+                        data: 'nip',
+                        nama: 'nip',
+                    }, {
+                        data: 'email',
+                        nama: 'email',
+                    }, {
+                        data: 'no_hp',
+                        nama: 'no_hp',
+                    },
+                    {
+                        data: 'status_aktif',
+                        nama: 'user.status_aktif',
+                    },
+
+                    {
+                        data: 'aksi',
+                        nama: 'aksi',
+                    }
+                ]
             });
         }
 
@@ -81,27 +92,27 @@
         }
 
         function showModal() {
-            $('#userForm')[0].reset();
+            $('#guruForm')[0].reset();
             resetValidation();
-            $('#userModal').modal('show');
+            $('#guruModal').modal('show');
 
-            save_method = 'create';
-            $('.modal-title').text('Tambah data User');
+            $('.modal-title').text('Tambah data Guru');
             $('.btnSubmit').text('Simpan');
+            save_method = 'create';
+            $('#statusAkunContainer').hide();
             userId = null; // Hapus user ID dari variabel jika tambah data baru
         }
-
         //untuk store dan update
-        $('#userForm').on('submit', function(e) {
+        $('#guruForm').on('submit', function(e) {
             e.preventDefault();
 
             const formData = new FormData(this)
 
-            var url = 'users',
+            var url = 'guru',
                 method = 'POST'; // Default untuk POST (tambah user)
 
             if (save_method == 'update') {
-                url = 'users/' + userId; // Gunakan userId dari variabel untuk update
+                url = 'guru/' + userId; // Gunakan userId dari variabel untuk update
                 formData.append('_method', 'PUT');
             }
 
@@ -115,7 +126,7 @@
                 processData: false,
                 contentType: false,
                 success: function(response) {
-                    $('#tableUser').DataTable().ajax.reload();
+                    $('#tableGuru').DataTable().ajax.reload();
                     Swal.fire({
                         title: "Good job!",
                         text: response.message,
@@ -123,7 +134,7 @@
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    $('#userModal').modal('hide');
+                    $('#guruModal').modal('hide');
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log(jqXHR.responseText);
@@ -141,12 +152,30 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: "GET",
-                url: "users/" + userId,
+                url: "guru/" + userId,
                 success: function(response) {
                     let result = response.data;
-                    $('#username').val(result.username);
-                    $('#email').val(result.email);
-                    $('#password').val(result.password);
+
+
+                    $('#nama_guru').val(result.nama_guru);
+                    $('#nip').val(result.nip);
+                    $('#tempat_lahir').val(result.tempat_lahir);
+                    $('#tgl_lahir').val(result.tgl_lahir);
+                    console.log('Sebelum set:', $('#jenis_kelamin').val()); // Nilai sebelum diset
+                    $('#jenis_kelamin').val(result.jenis_kelamin);
+                    console.log('Setelah set:', $('#jenis_kelamin').val()); // Nilai setelah diset
+
+                    $('#agama').val(result.agama ? result.agama.id : '');
+                    $('#alamat').val(result.alamat);
+                    $('#email').val(response.email);
+                    $('#no_hp').val(result.no_hp);
+                    $('#status_aktif').val(response.status_aktif); // Set status_akun
+
+                    $('#statusAkunContainer').show(); // Show status_akun when editing
+
+                    $('#guruModal').modal('show'); // Show the modal
+                    $('.modal-title').text('Update Data Guru');
+                    $('.btnSubmit').text('Perbarui');
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log(jqXHR.responseText);
@@ -176,11 +205,11 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         type: "DELETE",
-                        url: "users/" + id,
+                        url: "guru/" + id,
                         dataType: 'json',
                         success: function(response) {
-                            $('#userModal').modal('hide');
-                            $('#tableUser').DataTable().ajax.reload();
+                            $('#guruModal').modal('hide');
+                            $('#tableGuru').DataTable().ajax.reload();
                             Swal.fire({
                                 title: "Good job!",
                                 text: response.message,
@@ -200,4 +229,4 @@
     </script>
     <!-- Laravel Javascript Validation -->
     <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
-    {!! JsValidator::formRequest('App\Http\Requests\UserRequest', '#userForm') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\GuruRequest', '#guruForm') !!}

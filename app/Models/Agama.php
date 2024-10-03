@@ -7,5 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Agama extends Model
 {
+    protected $table = 'agama';
+    protected $primaryKey = 'id';
     use HasFactory;
+
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }
