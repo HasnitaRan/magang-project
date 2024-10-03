@@ -11,7 +11,7 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\Admin\dataUserController;
-
+use App\Http\Controllers\Admin\TahunAjaranController;
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -62,9 +62,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/gurus', [dataGuruController::class, 'serversideTable']); // get data
     Route::resource('admin/guru', dataGuruController::class)->except(['create', 'edit']);
 
-    //menu data guru
+    //menu data siswa
     Route::get('/siswas', [dataSiswaController::class, 'serversideTable']); // get data
     Route::resource('admin/siswa', dataSiswaController::class)->except(['create', 'edit']);
+
+    //menu data tahun ajaran
+    Route::get('/tahunajarans', [TahunAjaranController::class, 'serversideTable']); // get data
+    Route::resource('admin/tahunajaran', TahunAjaranController::class)->except(['create', 'edit']);
 
 
 

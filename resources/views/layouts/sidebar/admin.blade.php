@@ -29,14 +29,15 @@
                                 href="{{ url('admin/sekolah') }}">Data Sekolah</a>
                             <a class="nav-link {{ Request::is('admin/guru') ? 'active' : '' }}"
                                 href="{{ url('admin/guru') }}">Data Guru</a>
-                            <a class="nav-link" href="#">Data Kelas</a>
-                            <a class="nav-link {{ Request::is('admin/sekolah') ? 'active' : '' }}"
-                                href="{{ url('admin/sekolah') }}">Data Sekolah</a>
                             <a class="nav-link {{ Request::is('admin/siswa') ? 'active' : '' }}"
                                 href="{{ url('admin/siswa') }}">Data Siswa</a>
+                            {{-- <a class="nav-link {{ Request::is('admin/admins') ? 'active' : '' }}"
+                                href="{{ url('admin/admins') }}">Data Admin</a> --}}
+                            <a class="nav-link" href="#">Data Kelas</a>
                             <a class="nav-link" href="#">Data Ekskul</a>
                             <a class="nav-link" href="#">Data Anggota Ekskul</a>
-                            <a class="nav-link" href="#">Tahun Ajaran</a>
+                            <a class="nav-link {{ Request::is('admin/tahunajaran') ? 'active' : '' }}"
+                                href="{{ url('admin/tahunajaran') }}">Tahun Ajaran</a>
                             <a class="nav-link" href="#">Data Rombel</a>
                             <a class="nav-link" href="#">Data Pembelajaran</a>
                         </nav>
