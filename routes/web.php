@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\dataGuruController;
-use App\Http\Controllers\Admin\dataSiswaController;
 use App\Models\Sekolah;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -10,7 +8,11 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SekolahController;
+use App\Http\Controllers\Admin\ElemenController;
+use App\Http\Controllers\Admin\DimensiController;
+use App\Http\Controllers\Admin\dataGuruController;
 use App\Http\Controllers\Admin\dataUserController;
+use App\Http\Controllers\Admin\dataSiswaController;
 use App\Http\Controllers\Admin\TahunAjaranController;
 
 Route::get('/', function () {
@@ -69,6 +71,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     //menu data tahun ajaran
     Route::get('/tahunajarans', [TahunAjaranController::class, 'serversideTable']); // get data
     Route::resource('admin/tahunajaran', TahunAjaranController::class)->except(['create', 'edit']);
+
+     // menu data refernsi P5
+    //menu data dimensi
+    Route::get('/dimensi', [DimensiController::class, 'serversideTable']); // get data
+    Route::resource('admin/dimensi', DimensiController::class)->except(['create', 'edit']);
+    //menu data elemen
+    Route::get('/elemen', [ElemenController::class, 'serversideTable']); // get data
+    Route::resource('admin/elemen', ElemenController::class)->except(['create', 'edit']);
 
 
 
