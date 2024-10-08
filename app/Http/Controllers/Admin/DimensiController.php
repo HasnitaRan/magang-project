@@ -60,6 +60,7 @@ class DimensiController extends Controller
                 return '<div>
                 <button class="btn btn-sm btn-success" onclick="editModal(this)" data-id="' . $row->id . '">Edit</button>
                 <button class="btn btn-sm btn-danger" onclick="deleteModal(this)" data-id="' . $row->id . '">Hapus</button>
+                 <a href="/elemen/' . $row->id . '" class="btn btn-sm btn-info">Kelola Elemen</a>
             </div>';
             })
             ->rawColumns(['aksi'])

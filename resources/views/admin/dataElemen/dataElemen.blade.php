@@ -35,7 +35,7 @@
 
         </div>
     </main>
-    @include('admin.dataelemen.modal')
+    @include('admin.dataElemen.modal')
     @include('layouts.main.footer')
     <script>
         let elemenId; // Variabel global untuk menyimpan elemen ID
@@ -57,8 +57,8 @@
                     data: 'elemen',
                     nama: 'elemen',
                 }, { 
-                    data: 'id_dimensi',
-                    nama: 'id_dimensi',
+                    data: 'dimensi',
+                    nama: 'dimensi',
                 },
                 
                 {
@@ -82,6 +82,8 @@
             save_method = 'create';
             $('.modal-title').text('Tambah data Elemen');
             $('.btnSubmit').text('Simpan');
+            save_method = 'create';
+
             elemenId = null; // Hapus elemen ID dari variabel jika tambah data baru
         }
 
@@ -138,7 +140,13 @@
                 url: "elemen/" + elemenId,
                 success: function(response) {
                     let result = response.data;
+
                     $('#elemen').val(result.elemen);
+                    $('#id_dimensi').val(result.id_dimensi);
+
+                    $('#elemenModal').modal('show'); // Show the modal
+                    $('.modal-title').text('Update Data kelas');
+                    $('.btnSubmit').text('Perbarui');
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.log(jqXHR.responseText);
@@ -172,7 +180,7 @@
                         dataType: 'json',
                         success: function(response) {
                             $('#elemenModal').modal('hide');
-                            $('#tableelemen').DataTable().ajax.reload();
+                            $('#tableElemen').DataTable().ajax.reload();
                             Swal.fire({
                                 title: "Good job!",
                                 text: response.message,
@@ -192,4 +200,4 @@
     </script>
     <!-- Laravel Javascript Validation -->
     <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
-    {!! JsValidator::formRequest('App\Http\Requests\ElemenRequest', '#dlemenForm') !!}
+    {!! JsValidator::formRequest('App\Http\Requests\ElemenRequest', '#elemenForm') !!}

@@ -26,9 +26,11 @@ class ElemenController extends Controller
         return view('elemen.create');
     }
 
-    public function show(string $id): JsonResponse{
+    public function show(string $id)
+    {
+        $elemen = Elemen::find($id);
         return response()->json([
-            'data' => Elemen::find($id)
+            'data' => $elemen
         ]);
     }
 
@@ -45,9 +47,15 @@ class ElemenController extends Controller
         return response()->json(['message' => 'Data Elemen berhasil dihapus']);
     }
 
-    public function update(ElemenRequest $request, string $id){
+    public function update(ElemenRequest $request, string $id): JsonResponse
+    {
         $data = $request->validated();
-        Elemen::find($id)->update($data); // Create the Elemen
+
+        $elemen = Elemen::find($id);
+        $elemen->update($data);
+
+        
+
         return response()->json(['message' => 'Data Elemen berhasil diperbarui']);
     }
 
@@ -57,6 +65,9 @@ class ElemenController extends Controller
         $elemen = Elemen::get();
         return DataTables::of($elemen)
             ->addIndexColumn()
+            ->addColumn('dimensi', function ($row) {
+                return $row->dimensi ? $row->dimensi->dimensi . ' - ' . $row->dimensi->dimensi : 'Tidak ada';
+            })
             ->addColumn('aksi', function ($row) {
                 return '<div>
                 <button class="btn btn-sm btn-success" onclick="editModal(this)" data-id="' . $row->id . '">Edit</button>

@@ -23,7 +23,8 @@ class ElemenRequest extends FormRequest
     {
         return [
             'elemen' => 'required|min:3|max:255',
-            'id_dimensi' => 'required|exists:dimensi,id_dimensi',
+            'id_dimensi' => 'required|exists:dimensi,id',
+
         ];
     }
 }
