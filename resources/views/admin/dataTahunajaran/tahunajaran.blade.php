@@ -21,6 +21,7 @@
                                     <th>No</th>
                                     <th>Tahun Ajaran</th>
                                     <th>Semester</th>
+                                    <th>Is Active</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -60,6 +61,9 @@
                     data: 'semester',
                     nama: 'semester',
                 }, {
+                    data: 'is_active',
+                    nama: 'is_active',
+                },{
                     data: 'aksi',
                     nama: 'aksi',
                 }]

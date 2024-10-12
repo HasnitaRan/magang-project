@@ -16,6 +16,13 @@
                         <label for="semester">Semester</label>
                         <input type="semester" name="semester" class="form-control" id="semester">
                     </div>
+                    <div class="mb-3">
+                        <label for="is_active">Is Active:</label>
+                        <select id="is_active" name="is_active" class="form-control">
+                            <option value="0" {{ old('is_active') == 0 ? 'selected' : '' }}>Tidak Aktif</option>
+                            <option value="1" {{ old('is_active') == 1 ? 'selected' : '' }}>Aktif</option>
+                        </select>
+                    </div>
                     <div class="float-end">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary btnSubmit"></button>

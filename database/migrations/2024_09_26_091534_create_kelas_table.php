@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kelas', function (Blueprint $table) {
-            $table->id('id_kelas');
-            $table->string('nama_kelas',6);
+        Schema::create('rombongan_belajar', function (Blueprint $table) {
+            $table->id('id_rombel');
+            $table->string('nama_rombel',6);
             $table->string('tingkatan',2);
             $table->unsignedBigInteger(column: 'tahunAjaran_id');
             $table->foreign(columns: 'tahunAjaran_id')->references('id_tahunAjaran')->on(table: 'tahun_ajaran');

@@ -76,10 +76,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     //menu data dimensi
     Route::get('/dimensi', [DimensiController::class, 'serversideTable']); // get data
     Route::resource('admin/dimensi', DimensiController::class)->except(['create', 'edit']);
-    //menu data elemen
-    Route::get('/elemen', [ElemenController::class, 'serversideTable']); // get data
 
-    Route::resource('admin/elemen', ElemenController::class)->except(['create', 'edit']);
+    //menu data elemen
+    Route::resource('/dimensi/{dimensi_id}/elemen', ElemenController::class)->except(['create', 'edit']);
+    Route::get('/dimensi/{dimensi_id}/elemens', [ElemenController::class, 'serversideTable']); // get data
+    // Route::resource('admin/elemen', ElemenController::class)->except(['create', 'edit']);
 
 
 

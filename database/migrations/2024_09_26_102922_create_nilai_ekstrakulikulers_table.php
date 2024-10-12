@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('nilai_ekstrakulikuler', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_nilaiEkskul');
             $table->enum('nilai',['sangat baik','baik','cukup','kurang']);
             $table->string('keterangan');
-            $table->unsignedBigInteger(column: 'anggota_ekskul_id');
-            $table->foreign(columns: 'anggota_ekskul_id')->references('id_anggota_ekskul')->on(table: 'anggota_ekskul');
+            $table->unsignedBigInteger(column: 'anggotaEkskul_id');
+            $table->foreign(columns: 'anggotaEkskul_id')->references('id_anggotaEkskul')->on(table: 'anggota_ekskul');
             $table->timestamps();
         });
     }

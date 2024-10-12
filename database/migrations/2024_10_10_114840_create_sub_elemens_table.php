@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('referensi_p5', function (Blueprint $table) {
+        Schema::create('sub_elemen', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_elemen')->constrained('elemen',indexName:'elemen_id');
-            $table->enum('fase',['E','F']);
-            $table->string('target_capaian');
+            
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('referensi_p5');
+        Schema::dropIfExists('sub_elemens');
     }
 };

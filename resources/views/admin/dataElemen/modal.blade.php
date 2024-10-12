@@ -13,7 +13,7 @@
                         <label for="elemen">Elemen</label>
                         <input type="text" name="elemen" class="form-control" id="elemen">
                     </div>
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="id_dimensi">Dimensi</label>
                         <select name="id_dimensi" class="form-control" id="id_dimensi">
                             <option value="">-- Pilih Dimensi --</option>
@@ -21,7 +21,7 @@
                                 <option value="{{ $d->id }}">{{ $d->dimensi }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
 
 
                     <div class="float-end">

@@ -58,10 +58,11 @@ class DimensiController extends Controller
             ->addIndexColumn()
             ->addColumn('aksi', function ($row) {
                 return '<div>
-                <button class="btn btn-sm btn-success" onclick="editModal(this)" data-id="' . $row->id . '">Edit</button>
-                <button class="btn btn-sm btn-danger" onclick="deleteModal(this)" data-id="' . $row->id . '">Hapus</button>
-                 <a href="/elemen/' . $row->id . '" class="btn btn-sm btn-info">Kelola Elemen</a>
+            <button class="btn btn-sm btn-success" onclick="editModal(this)" data-id="' . $row->id . '">Edit</button>
+            <button class="btn btn-sm btn-danger" onclick="deleteModal(this)" data-id="' . $row->id . '">Hapus</button>
+            <a href="/dimensi/' . $row->id . '/elemen" class="btn btn-sm btn-secondary">Kelola Elemen</a>
             </div>';
+
             })
             ->rawColumns(['aksi'])
             ->make();

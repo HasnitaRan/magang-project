@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('catatan__walikelas', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('anggota_kelas');
-            $table->foreign(columns: 'anggota_kelas')->references('id_anggota_kelas')->on(table: 'anggota_kelas');
+        Schema::create('catatan_walikelas', function (Blueprint $table) {
+            $table->id('id_catatanWalkel');
+            $table->unsignedBigInteger('anggotaRombel_id');
+            $table->foreign(columns: 'anggotaRombel_id')->references('id_anggotaRombel')->on(table: 'anggota_rombel');
             $table->longText('catatan');
             $table->timestamps();
         });

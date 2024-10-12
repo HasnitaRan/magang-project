@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('pembelajaran', function (Blueprint $table) {
             $table->id('id_pembelajaran');
-            $table->unsignedBigInteger('kelas_id');
-            $table->foreign(columns: 'kelas_id')->references('id_kelas')->on(table: 'kelas');
+            $table->unsignedBigInteger('rombel_id');
+            $table->foreign(columns: 'rombel_id')->references('id_rombel')->on(table: 'rombongan_belajar');
             $table->unsignedBigInteger('mata_pelajaran_id');
             $table->foreign(columns: 'mata_pelajaran_id')->references('id_mapel')->on(table: 'mata_pelajaran');
             $table->unsignedBigInteger('guru_pengampu_id');

@@ -16,8 +16,8 @@ return new class extends Migration
             $table->integer('sakit')->nullable();
             $table->integer('izin')->nullable();
             $table->integer(column: 'tanpa_keterangan')->nullable();
-            $table->unsignedBigInteger('anggota_kelas');
-            $table->foreign(columns: 'anggota_kelas')->references('id_anggota_kelas')->on(table: 'anggota_kelas');
+            $table->unsignedBigInteger('anggotaRombel_id');
+            $table->foreign(columns: 'anggotaRombel_id')->references('id_anggotaRombel')->on(table: 'anggota_rombel');
             $table->timestamps();
         });
     }

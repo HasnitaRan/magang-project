@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('id_tahunAjaran');
             $table->string('tahun_ajaran',20);
             $table->string('semester',10);
+            $table->boolean('is_active')->default(0);
             $table->timestamps();
         });
     }

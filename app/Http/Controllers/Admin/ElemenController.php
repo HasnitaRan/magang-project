@@ -14,11 +14,16 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ElemenController extends Controller
 {
-    public function index(): View
+    public function index(string $dimensi_id): View
     {
-        $dimensi= Dimensi::all();
+        // Ambil dimensi berdasarkan ID
+        $dimensi = Dimensi::findOrFail($dimensi_id);
 
-        return view('admin.dataElemen.dataElemen', compact('dimensi'));
+        // Ambil elemen-elemen yang terkait dengan dimensi ini
+        $elemen = Elemen::where('id_dimensi', $dimensi->id)->get();
+
+        // Kirimkan data dimensi dan elemen ke view
+        return view('admin.dataElemen.dataElemen', compact('dimensi', 'elemen'));
     }
 
     public function create()
@@ -26,21 +31,36 @@ class ElemenController extends Controller
         return view('elemen.create');
     }
 
-    public function show(string $id)
-    {
-        $elemen = Elemen::find($id);
-        return response()->json([
-            'data' => $elemen
-        ]);
-    }
+    // public function show(string $id)
+    // {
+    //     $elemen = Elemen::find($id);
 
-    public function store(ElemenRequest $request): JsonResponse
-    {
-        $data = $request->validated();
+    //     // Cek apakah elemen ditemukan
+    //     if (!$elemen) {
+    //         return redirect()->route('elemen.index')->with('error', 'Elemen tidak ditemukan.');
+    //     }
 
-        Elemen::create($data); // Create the Elemen
-        return response()->json(['message' => 'Data Elemen berhasil ditambahkan']);
-    }
+    //     // Cek apakah permintaan adalah AJAX (untuk JSON)
+    //     if (request()->ajax()) {
+    //         return response()->json([
+    //             'data' => $elemen
+    //         ]);
+    //     }
+
+    //     // Jika bukan AJAX, kembalikan tampilan detail
+    //     return view('elemen.show', compact('elemen'));
+    // }
+
+
+    public function store(ElemenRequest $request, $dimensi_id): JsonResponse
+{
+    $data = $request->validated();
+    $data['id_dimensi'] = $dimensi_id;
+    Elemen::create($data);
+
+    return response()->json(['message' => 'Data Elemen berhasil ditambahkan']);
+}
+
 
     public function destroy(string $id){
         Elemen::destroy($id);
@@ -60,9 +80,9 @@ class ElemenController extends Controller
     }
 
 
-    public function serversideTable(Request $request)
+    public function serversideTable(Request $request, $dimensi_id)
     {
-        $elemen = Elemen::get();
+        $elemen = Elemen::where('id_dimensi', $dimensi_id)->get();
         return DataTables::of($elemen)
             ->addIndexColumn()
             ->addColumn('dimensi', function ($row) {
@@ -77,4 +97,5 @@ class ElemenController extends Controller
             ->rawColumns(['aksi'])
             ->make();
     }
+    
 }
